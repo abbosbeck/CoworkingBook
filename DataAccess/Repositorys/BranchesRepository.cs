@@ -1,9 +1,7 @@
-﻿using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace DataAccess.Repositorys
 {
@@ -17,34 +15,39 @@ namespace DataAccess.Repositorys
 
         public async Task<BranchModel> Create(BranchModel model)
         {
-            var data = new BranchModel()
-            {
-                BranchName = "Chilonzor",
-                NumberOfChairs = 100
-            };
-            await _dbContext.AddAsync(data);
+            await _dbContext.Branches.AddAsync(model);
             await _dbContext.SaveChangesAsync();
             return model;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            var branch = await _dbContext.Branches.FindAsync(id);
+            if(branch != null)
+            {
+                _dbContext.Branches.Remove(branch);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
 
-        public Task<IEnumerable<BranchModel>> GetAll()
+        public async Task<IEnumerable<BranchModel>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Branches.ToListAsync();
         }
 
-        public Task<BranchModel> GetById(int id)
+        public async Task<BranchModel> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Branches.FindAsync(id);
         }
 
-        public Task<BranchModel> Update(int id, BranchModel model)
+        public async Task<BranchModel> Update(int id, BranchModel model)
         {
-            throw new NotImplementedException();
+            var updateBranch = _dbContext.Branches.Attach(model);
+            updateBranch.State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+            return model;
         }
     }
 }
