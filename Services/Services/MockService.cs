@@ -1,30 +1,26 @@
-﻿using Models;
+﻿using DataAccess.Repositorys;
+using Models;
+using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Repositorys
+namespace Services.Services
 {
-    public class BranchesRepository : IGenericRepository<BranchModel>
+    public class MockService : IGenericCRUDService<BranchModel>
     {
-        private readonly AppDbContext _dbContext;
-        public BranchesRepository(AppDbContext dbContext)
+        private readonly IGenericRepository<BranchModel> genericRepository;
+        public MockService(IGenericRepository<BranchModel> genericRepository)
         {
-            _dbContext = dbContext;
+            this.genericRepository = genericRepository;
         }
 
         public async Task<BranchModel> Create(BranchModel model)
         {
-            var data = new BranchModel()
-            {
-                BranchName = "Chilonzor",
-                NumberOfChairs = 100
-            };
-            await _dbContext.AddAsync(data);
-            await _dbContext.SaveChangesAsync();
-            return model;
+            var result = await genericRepository.Create(model);
+            return result;
         }
 
         public Task<bool> Delete(int id)
