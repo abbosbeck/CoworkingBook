@@ -11,7 +11,9 @@ namespace Models
         public int Id { get; set; }
         public int TableId { get; set; }
         public DateTime FromTime { get; set; }
-        public int Perion { get; set; }
+        public int Period { get; set; }
+
+        public virtual TableModel Table { get; set; }
 
     }
 }

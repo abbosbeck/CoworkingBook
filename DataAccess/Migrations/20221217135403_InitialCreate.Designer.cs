@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221217125838_InitialCreate")]
+    [Migration("20221217135403_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -36,13 +36,15 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("FromTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Perion")
+                    b.Property<int>("Period")
                         .HasColumnType("int");
 
                     b.Property<int>("TableId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TableId");
 
                     b.ToTable("Bookeds");
                 });
@@ -83,6 +85,8 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.ToTable("Floors");
                 });
 
@@ -105,7 +109,69 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("FloorId");
+
                     b.ToTable("Tables");
+                });
+
+            modelBuilder.Entity("Models.BookedTableModel", b =>
+                {
+                    b.HasOne("Models.TableModel", "Table")
+                        .WithMany("BookedTables")
+                        .HasForeignKey("TableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Table");
+                });
+
+            modelBuilder.Entity("Models.FloorModel", b =>
+                {
+                    b.HasOne("Models.BranchModel", "Branch")
+                        .WithMany("Floors")
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Branch");
+                });
+
+            modelBuilder.Entity("Models.TableModel", b =>
+                {
+                    b.HasOne("Models.BranchModel", "Branch")
+                        .WithMany("Tables")
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.FloorModel", "Floor")
+                        .WithMany("Tables")
+                        .HasForeignKey("FloorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Branch");
+
+                    b.Navigation("Floor");
+                });
+
+            modelBuilder.Entity("Models.BranchModel", b =>
+                {
+                    b.Navigation("Floors");
+
+                    b.Navigation("Tables");
+                });
+
+            modelBuilder.Entity("Models.FloorModel", b =>
+                {
+                    b.Navigation("Tables");
+                });
+
+            modelBuilder.Entity("Models.TableModel", b =>
+                {
+                    b.Navigation("BookedTables");
                 });
 #pragma warning restore 612, 618
         }
