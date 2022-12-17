@@ -1,6 +1,6 @@
 namespace Models;
 
-class FloorModel
+public class FloorModel
 {
     public int FloorId { get; set; }
     public int NumbersOfChair { get; set; }
