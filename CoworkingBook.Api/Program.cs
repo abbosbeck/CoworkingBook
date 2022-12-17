@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CoworkingBookingDb")));
 builder.Services.AddTransient<IGenericCRUDService<BranchModel>, MockService>();
 builder.Services.AddTransient<IGenericRepository<BranchModel>, BranchesRepository>();
-
+//for check
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
