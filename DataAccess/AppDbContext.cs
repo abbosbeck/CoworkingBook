@@ -1,6 +1,7 @@
 ﻿
 
 using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace DataAccess
 {
@@ -10,6 +11,9 @@ namespace DataAccess
         {
             
         }
-        
+        DbSet<BranchModel> Branches { get; set; }
+        DbSet<FloorModel> Floors { get; set; }
+        DbSet<TableModel> Tables { get; set; }
+        DbSet<BookedTableModel> Bookeds { get; set; }
     }
 }

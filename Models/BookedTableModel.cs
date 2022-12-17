@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class BandQilinganTableModel
+    public class BookedTableModel
     {
         public int Id { get; set; }
         public int TableId { get; set; }
