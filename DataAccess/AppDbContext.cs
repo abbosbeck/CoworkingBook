@@ -12,6 +12,7 @@ namespace DataAccess
         {
             
         }
+        //for check
         DbSet<BranchModel> Branches { get; set; }
         DbSet<FloorModel> Floors { get; set; }
         DbSet<TableModel> Tables { get; set; }
