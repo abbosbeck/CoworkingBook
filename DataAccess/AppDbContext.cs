@@ -13,10 +13,10 @@ namespace DataAccess
             
         }
         //for check
-        DbSet<BranchModel> Branches { get; set; }
-        DbSet<FloorModel> Floors { get; set; }
-        DbSet<TableModel> Tables { get; set; }
-        DbSet<BookedTableModel> Bookeds { get; set; }
+        public DbSet<BranchModel> Branches { get; set; }
+        public DbSet<FloorModel> Floors { get; set; }
+        public DbSet<TableModel> Tables { get; set; }
+        public DbSet<BookedTableModel> Bookeds { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
