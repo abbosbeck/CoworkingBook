@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositorys
 {
-    public class FloorsRepository : IGenericRepository<FloorModel>
+    public class FloorsRepository : IGenericRepository<Floor>
     {
         private readonly AppDbContext _dbContext;
         public FloorsRepository(AppDbContext dbContext)
@@ -16,7 +16,7 @@ namespace DataAccess.Repositorys
             _dbContext = dbContext;
         }
 
-        public async Task<FloorModel> Create(FloorModel model)
+        public async Task<Floor> Create(Floor model)
         {
             await _dbContext.Floors.AddAsync(model);
             await _dbContext.SaveChangesAsync();
@@ -35,17 +35,17 @@ namespace DataAccess.Repositorys
             return false;
         }
 
-        public async Task<IEnumerable<FloorModel>> GetAll()
+        public async Task<IEnumerable<Floor>> GetAll()
         {
             return await _dbContext.Floors.ToListAsync();
         }
 
-        public async Task<FloorModel> GetById(int id)
+        public async Task<Floor> GetById(int id)
         {
             return await _dbContext.Floors.FindAsync(id);
         }
 
-        public async Task<FloorModel> Update(int id, FloorModel model)
+        public async Task<Floor> Update(int id, Floor model)
         {
             var updatefloor = _dbContext.Floors.Attach(model);
             updatefloor.State = EntityState.Modified;

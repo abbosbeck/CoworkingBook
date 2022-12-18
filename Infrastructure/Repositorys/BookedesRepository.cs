@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositorys
 {
-    public class BookedesRepository : IGenericRepository<BookedTableModel>
+    public class BookedesRepository : IGenericRepository<BookedTable>
     {
         private readonly AppDbContext _dbContext;
         public BookedesRepository(AppDbContext dbContext)
@@ -16,7 +16,7 @@ namespace DataAccess.Repositorys
             _dbContext = dbContext;
         }
 
-        public async Task<BookedTableModel> Create(BookedTableModel model)
+        public async Task<BookedTable> Create(BookedTable model)
         {
             await _dbContext.Bookeds.AddAsync(model);
             await _dbContext.SaveChangesAsync();
@@ -35,17 +35,17 @@ namespace DataAccess.Repositorys
             return false;
         }
 
-        public async Task<IEnumerable<BookedTableModel>> GetAll()
+        public async Task<IEnumerable<BookedTable>> GetAll()
         {
             return await _dbContext.Bookeds.ToListAsync();
         }
 
-        public async Task<BookedTableModel> GetById(int id)
+        public async Task<BookedTable> GetById(int id)
         {
             return await _dbContext.Bookeds.FindAsync(id);
         }
 
-        public async Task<BookedTableModel> Update(int id, BookedTableModel model)
+        public async Task<BookedTable> Update(int id, BookedTable model)
         {
             var updateBooked = _dbContext.Bookeds.Attach(model);
             updateBooked.State = EntityState.Modified;

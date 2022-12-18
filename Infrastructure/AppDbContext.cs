@@ -16,32 +16,32 @@ namespace DataAccess
             
         }
         //for check
-        public DbSet<BranchModel> Branches { get; set; }
-        public DbSet<FloorModel> Floors { get; set; }
-        public DbSet<TableModel> Tables { get; set; }
-        public DbSet<BookedTableModel> Bookeds { get; set; }
+        public DbSet<Branch> Branches { get; set; }
+        public DbSet<Floor> Floors { get; set; }
+        public DbSet<Table> Tables { get; set; }
+        public DbSet<BookedTable> Bookeds { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<FloorModel>()
+            modelBuilder.Entity<Floor>()
                 .HasMany(p => p.Tables)
                 .WithOne(p => p.Floor)
                 .HasForeignKey(p => p.FloorId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            modelBuilder.Entity<BranchModel>()
+            modelBuilder.Entity<Branch>()
                 .HasMany(p => p.Tables)
                 .WithOne(p => p.Branch)
                 .HasForeignKey(p => p.BranchId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            modelBuilder.Entity<TableModel>()
+            modelBuilder.Entity<Table>()
                 .HasMany(p => p.BookedTables)
                 .WithOne(p => p.Table)
                 .HasForeignKey(p => p.TableId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            modelBuilder.Entity<BranchModel>()
+            modelBuilder.Entity<Branch>()
                 .HasMany(p => p.Floors)
                 .WithOne(p => p.Branch)
                 .HasForeignKey(p => p.BranchId)

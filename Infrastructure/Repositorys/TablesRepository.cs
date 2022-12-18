@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositorys
 {
-    public class TablesRepository : IGenericRepository<TableModel>
+    public class TablesRepository : IGenericRepository<Table>
     {
         private readonly AppDbContext _dbContext;
         public TablesRepository(AppDbContext dbContext)
@@ -16,7 +16,7 @@ namespace DataAccess.Repositorys
             _dbContext = dbContext;
         }
 
-        public async Task<TableModel> Create(TableModel model)
+        public async Task<Table> Create(Table model)
         {
             await _dbContext.Tables.AddAsync(model);
             await _dbContext.SaveChangesAsync();
@@ -35,17 +35,17 @@ namespace DataAccess.Repositorys
             return false;
         }
 
-        public async Task<IEnumerable<TableModel>> GetAll()
+        public async Task<IEnumerable<Table>> GetAll()
         {
             return await _dbContext.Tables.ToListAsync();
         }
 
-        public async Task<TableModel> GetById(int id)
+        public async Task<Table> GetById(int id)
         {
             return await _dbContext.Tables.FindAsync(id);
         }
 
-        public async Task<TableModel> Update(int id, TableModel model)
+        public async Task<Table> Update(int id, Table model)
         {
             var updatetable = _dbContext.Tables.Attach(model);
             updatetable.State = EntityState.Modified;

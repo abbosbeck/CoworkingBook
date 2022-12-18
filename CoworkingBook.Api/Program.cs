@@ -47,18 +47,18 @@ builder.Services.AddAuthentication(options =>
 
 
 builder.Services.AddTransient<IGenericCRUDService<BookedTableResponseDto, BookedTableRegisterDto>, BookedTableCRUDService>();
-builder.Services.AddTransient<IGenericRepository<BookedTableModel>, BookedesRepository>();
+builder.Services.AddTransient<IGenericRepository<BookedTable>, BookedesRepository>();
 
 
 builder.Services.AddTransient<IGenericCRUDService<BranchResponseDto, BranchRegisterDto>, BranchCRUDService>();
-builder.Services.AddTransient<IGenericRepository<BranchModel>, BranchesRepository>();
+builder.Services.AddTransient<IGenericRepository<Branch>, BranchesRepository>();
 
 builder.Services.AddTransient<IGenericCRUDService<FloorResponseDto, FloorRegisterDto>, FloorCRUDService>();
-builder.Services.AddTransient<IGenericRepository<FloorModel>, FloorsRepository>();
+builder.Services.AddTransient<IGenericRepository<Floor>, FloorsRepository>();
 
 
 builder.Services.AddTransient<IGenericCRUDService<TableResponseDto, TableRegisterDto>, TableCRUDService>();
-builder.Services.AddTransient<IGenericRepository<TableModel>, TablesRepository>();
+builder.Services.AddTransient<IGenericRepository<Table>, TablesRepository>();
 
 var app = builder.Build();
 

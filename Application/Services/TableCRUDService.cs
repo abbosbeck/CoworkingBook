@@ -7,16 +7,16 @@ namespace Application.Services
 {
     public class TableCRUDService : IGenericCRUDService<TableResponseDto, TableRegisterDto>
     {
-        private readonly IGenericRepository<TableModel> _genericRepository;
+        private readonly IGenericRepository<Table> _genericRepository;
 
-        public TableCRUDService(IGenericRepository<TableModel> genericRepository)
+        public TableCRUDService(IGenericRepository<Table> genericRepository)
         {
             _genericRepository = genericRepository;
         }
 
         public async Task<TableResponseDto> Create(TableRegisterDto model)
         {
-            var table = new TableModel
+            var table = new Table
             {
                 BranchId = model.BranchId,
                 FloorId = model.FloorId,
@@ -75,7 +75,7 @@ namespace Application.Services
 
         public async Task<TableResponseDto> Update(int id, TableRegisterDto model)
         {
-            var newTable = new TableModel
+            var newTable = new Table
             {
                 Id = id,
                 BranchId = model.BranchId,
