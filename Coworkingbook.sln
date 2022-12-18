@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoworkingBook.Api", "CoworkingBook.Api\CoworkingBook.Api.csproj", "{D45077BB-EA48-4769-939E-ECF1F8F00C15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoworkingBook.Api", "CoworkingBook.Api\CoworkingBook.Api.csproj", "{D45077BB-EA48-4769-939E-ECF1F8F00C15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{46058878-9CD9-4D10-ACE6-345238CA98ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{46058878-9CD9-4D10-ACE6-345238CA98ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{57D0C080-2CE2-48CA-8497-5C859CADA04B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{57D0C080-2CE2-48CA-8497-5C859CADA04B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{BD30E1C0-28D7-4CFD-BC6E-E17C8CD5B8D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services\Application.csproj", "{BD30E1C0-28D7-4CFD-BC6E-E17C8CD5B8D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
