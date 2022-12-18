@@ -1,5 +1,6 @@
 ﻿
 
+using Infrastructure.Conficurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -44,6 +45,8 @@ namespace DataAccess
                 .WithOne(p => p.Branch)
                 .HasForeignKey(p => p.BranchId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
 
             base.OnModelCreating(modelBuilder);
 
