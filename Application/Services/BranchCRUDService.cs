@@ -19,16 +19,21 @@ namespace Application.Services
             _repository = repository;
         }
 
-        public async Task<BranchResponseDto> Create(BranchResponseDto model)
+        public async Task<BranchResponseDto> Create(BranchRegisterDto model)
         {
-            var result = new BranchModel()
+            var branch = new BranchModel()
             {
-                Id = model.Id,
                 BranchName = model.BranchName,
                 NumberOfChairs = model.NumberOfChairs,
             };
-            await _repository.Create(result);
-            return model;
+            await _repository.Create(branch);
+            var  result = new BranchResponseDto()
+            {
+                Id = branch.Id,
+                BranchName = branch.BranchName,
+                NumberOfChairs = branch.NumberOfChairs
+            };
+            return result;
         }
 
         public async Task<bool> Delete(int id)
