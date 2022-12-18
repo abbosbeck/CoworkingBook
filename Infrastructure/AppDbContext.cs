@@ -1,6 +1,7 @@
 ﻿
 
 using Infrastructure.Conficurations;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -46,7 +47,30 @@ namespace DataAccess
                 .HasForeignKey(p => p.BranchId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+
+            #region Seed
+
+            modelBuilder.Entity<AppUser>()
+                .HasData(new AppUser
+                {
+                    Id = "1",
+                    UserName = "Admin",
+                    NormalizedUserName = "ADMIN",
+                    Email = "admin@site.com",
+                    NormalizedEmail = "ADMIN@SITE.COM",
+                    EmailConfirmed = false,
+                    PasswordHash = new PasswordHasher<AppUser>().HashPassword(null, "Qwerty123!"),
+                    SecurityStamp = Guid.NewGuid().ToString(),
+                    ConcurrencyStamp = Guid.NewGuid().ToString(),
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = true,
+                    AccessFailedCount = 0
+                });
+
+            #endregion
+
+            //modelBuilder.ApplyConfiguration(new AppUserConfiguration());
 
             base.OnModelCreating(modelBuilder);
 
