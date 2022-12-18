@@ -32,9 +32,9 @@ namespace CoworkingBook.Api.Controllers
             return Ok(await _branchSvc.GetById(id));
         }
 
-        // POST api/<BranchController>
-        [HttpPost]
+        // POST api/<BranchContr oller>
         [Authorize(Roles = "Admin")]
+        [HttpPost]
         public async Task<IActionResult> Post([FromBody] BranchRegisterDto value)
         {
             var createBranch = await _branchSvc.Create(value);
