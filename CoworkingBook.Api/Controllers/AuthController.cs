@@ -72,7 +72,7 @@ namespace CoworkingBook.Api.Controllers
                     expiration = token.ValidTo
                 });
             }
-
+             
             return Unauthorized();
         }
 
