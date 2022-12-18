@@ -47,8 +47,8 @@ namespace DataAccess.Repositorys
 
         public async Task<BookedTableModel> Update(int id, BookedTableModel model)
         {
-            var updatebooked = _dbContext.Bookeds.Attach(model);
-            updatebooked.State = EntityState.Modified;
+            var updateBooked = _dbContext.Bookeds.Attach(model);
+            updateBooked.State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
             return model;
         }
