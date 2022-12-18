@@ -62,7 +62,7 @@ namespace CoworkingBook.Api.Controllers
             }
             else
             {
-                return NotFound();
+                return NotFound("There is no booked table in that Id");
             }
         }
     }

@@ -64,7 +64,7 @@ namespace CoworkingBook.Api.Controllers
             }
             else
             {
-                return NotFound();
+                return NotFound("There is no branch in that Id");
             }
         }
     }

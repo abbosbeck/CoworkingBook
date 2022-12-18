@@ -63,7 +63,7 @@ namespace CoworkingBook.Api.Controllers
             }
             else
             {
-                return NotFound();
+                return NotFound("There is no floor in that Id");
             }
         }
     }
