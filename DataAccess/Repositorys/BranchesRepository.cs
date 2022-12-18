@@ -1,9 +1,4 @@
 ﻿using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Repositorys
 {
@@ -17,7 +12,7 @@ namespace DataAccess.Repositorys
 
         public async Task<BranchModel> Create(BranchModel model)
         {
-            await _dbContext.Branches.AddAsync(model);
+            await _dbContext.AddAsync(model);
             await _dbContext.SaveChangesAsync();
             return model;
         }
