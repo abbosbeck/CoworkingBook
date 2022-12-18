@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Dto;
+using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
 
@@ -10,8 +11,8 @@ namespace CoworkingBook.Api.Controllers
     [ApiController]
     public class BranchController : ControllerBase
     {
-        private readonly IGenericCRUDService<BranchModel> _genericCRUDService;
-        public BranchController(IGenericCRUDService<BranchModel> genericCRUDService)
+        private readonly IGenericCRUDService<BranchResponseDto, BranchRegisterDto> _genericCRUDService;
+        public BranchController(IGenericCRUDService<BranchResponseDto, BranchRegisterDto> genericCRUDService)
         {
             _genericCRUDService = genericCRUDService;
         }
@@ -32,7 +33,7 @@ namespace CoworkingBook.Api.Controllers
 
         // POST api/<BranchController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] BranchModel value)
+        public async Task<IActionResult> Post([FromBody] BranchRegisterDto value)
         {
             var createEmployee = await _genericCRUDService.Create(value);
             var routeValues = new { id = createEmployee.Id };

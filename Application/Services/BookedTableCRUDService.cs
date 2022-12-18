@@ -14,11 +14,10 @@ namespace Application.Services
             _genericCRUDRepository = genericCRUD;
         }
 
-        public async Task<BookedTableResponseDto> Create(BookedTableResponseDto model)
+        public async Task<BookedTableResponseDto> Create(BookedTableRegisterDto model)
         {
             var newTable = new BookedTableModel
             {
-                Id = model.Id,
                 TableId = model.TableId,
                 FromTime = model.FromTime,
                 Period = model.Period,

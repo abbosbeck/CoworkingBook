@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Models;
 using Services.Interfaces;
-using Services.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,9 +48,16 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddTransient<IGenericCRUDService<BookedTableResponseDto, BookedTableRegisterDto>,
     BookedTableCRUDService>();
+builder.Services.AddTransient<IGenericRepository<BookedTableModel>,
+    BookedesRepository>();
 
+
+builder.Services.AddTransient<IGenericCRUDService<BranchResponseDto, BranchRegisterDto>,
+    BranchCRUDService>();
 builder.Services.AddTransient<IGenericRepository<BranchModel>, BranchesRepository>();
-//for check
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
