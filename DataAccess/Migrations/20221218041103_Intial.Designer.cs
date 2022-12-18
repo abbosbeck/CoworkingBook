@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221217135403_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221218041103_Intial")]
+    partial class Intial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,7 +58,6 @@ namespace DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BranchName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberOfChairs")
@@ -121,7 +120,6 @@ namespace DataAccess.Migrations
                     b.HasOne("Models.TableModel", "Table")
                         .WithMany("BookedTables")
                         .HasForeignKey("TableId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Table");
@@ -132,7 +130,6 @@ namespace DataAccess.Migrations
                     b.HasOne("Models.BranchModel", "Branch")
                         .WithMany("Floors")
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Branch");
@@ -143,13 +140,11 @@ namespace DataAccess.Migrations
                     b.HasOne("Models.BranchModel", "Branch")
                         .WithMany("Tables")
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.FloorModel", "Floor")
                         .WithMany("Tables")
                         .HasForeignKey("FloorId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Branch");
