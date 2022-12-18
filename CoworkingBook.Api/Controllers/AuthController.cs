@@ -40,7 +40,7 @@ namespace CoworkingBook.Api.Controllers
             var result = await _userManager.CreateAsync(user, registerModel.Password);
             if (!result.Succeeded)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseModel { Status = "Error", Message = "User creation faild!" });
+                return StatusCode(StatusCodes.Status400BadRequest, new ResponseModel { Status = "Error", Message = "User creation faild!" });
             }
             return Ok(new ResponseModel { Status = "Success", Message = "User created successfully!" });
         }
