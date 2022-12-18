@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
 
@@ -41,6 +42,7 @@ namespace CoworkingBook.Api.Controllers
 
         // PUT api/<BookedTableController>/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Put(int id, [FromBody] BookedTableRegisterDto table)
         {
             var updatedBookedTable = await _bookedTableSvc.Update(id, table);
@@ -49,6 +51,7 @@ namespace CoworkingBook.Api.Controllers
 
         // DELETE api/<BookedTableController>/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             bool deletedBookedTable = await _bookedTableSvc.Delete(id);

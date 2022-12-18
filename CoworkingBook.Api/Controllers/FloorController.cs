@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
 
@@ -32,6 +33,7 @@ namespace CoworkingBook.Api.Controllers
 
         // POST api/<FloorController>
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Post([FromBody] FloorRegisterDto floor)
         {
             var createFloor = await _floorSvc.Create(floor);
@@ -41,6 +43,7 @@ namespace CoworkingBook.Api.Controllers
 
         // PUT api/<FloorController>/5
         [HttpPut("{id}")]
+        [Authorize (Roles = "Admin")]
         public async Task<IActionResult> Put(int id, [FromBody] FloorRegisterDto floor)
         {
             var updatedFloor = await _floorSvc.Update(id, floor);
@@ -49,6 +52,7 @@ namespace CoworkingBook.Api.Controllers
 
         // DELETE api/<FloorController>/5
         [HttpDelete("{id}")]
+        [Authorize (Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             bool deletedFloor = await _floorSvc.Delete(id);
