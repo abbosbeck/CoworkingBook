@@ -19,16 +19,21 @@ namespace Application.Services
             _repository = repository;
         }
 
-        public async Task<FloorResponseDto> Create(FloorResponseDto model)
+        public async Task<FloorResponseDto> Create(FloorRegisterDto model)
         {
             var result = new FloorModel()
             {
-                Id = model.Id,
                 NumbersOfChair = model.NumbersOfChair,
                 BranchId = model.BranchId,
             };
             await _repository.Create(result);
-            return model;
+            var returnValue = new FloorResponseDto
+            {
+                Id = result.Id,
+                BranchId = result.BranchId,
+                NumbersOfChair = result.NumbersOfChair
+            };
+            return returnValue;
         }
 
         public async Task<bool> Delete(int id)

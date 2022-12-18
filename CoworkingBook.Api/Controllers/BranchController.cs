@@ -35,9 +35,9 @@ namespace CoworkingBook.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] BranchRegisterDto value)
         {
-            var createEmployee = await _branchSvc.Create(value);
-            var routeValues = new { id = createEmployee.Id };
-            return CreatedAtRoute(routeValues, createEmployee);
+            var createBranch = await _branchSvc.Create(value);
+            var routeValues = new { id = createBranch.Id };
+            return CreatedAtRoute(routeValues, createBranch);
         }
 
         // PUT api/<BranchController>/5
@@ -52,9 +52,9 @@ namespace CoworkingBook.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            bool deletedEmployee = await _branchSvc.Delete(id);
+            bool deletedBranch = await _branchSvc.Delete(id);
 
-            if (deletedEmployee)
+            if (deletedBranch)
             {
                 return Ok();
             }
