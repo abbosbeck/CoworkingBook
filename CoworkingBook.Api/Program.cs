@@ -1,3 +1,5 @@
+using Application.Dto;
+using Application.Services;
 using DataAccess;
 using DataAccess.Repositorys;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -45,7 +47,9 @@ builder.Services.AddAuthentication(options =>
     });
 
 
-builder.Services.AddTransient<IGenericCRUDService<BranchModel>, MockService>();
+builder.Services.AddTransient<IGenericCRUDService<BookedTableResponseDto, BookedTableRegisterDto>,
+    BookedTableCRUDService>();
+
 builder.Services.AddTransient<IGenericRepository<BranchModel>, BranchesRepository>();
 //for check
 var app = builder.Build();
