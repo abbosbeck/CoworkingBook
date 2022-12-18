@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Dto;
+using Microsoft.AspNetCore.Mvc;
+using Services.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,57 @@ namespace CoworkingBook.Api.Controllers
     [ApiController]
     public class FloorController : ControllerBase
     {
+        private readonly IGenericCRUDService<FloorResponseDto, FloorRegisterDto> _floorSvc;
+        public FloorController(IGenericCRUDService<FloorResponseDto, FloorRegisterDto> floorSvc)
+        {
+            _floorSvc = floorSvc;
+        }
+
         // GET: api/<FloorController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await _floorSvc.GetAll());
         }
 
         // GET api/<FloorController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            return Ok(await _floorSvc.GetById(id));
         }
 
         // POST api/<FloorController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] FloorRegisterDto floor)
         {
+            var createFloor = await _floorSvc.Create(floor);
+            var routeValues = new { id = createFloor.Id };
+            return CreatedAtRoute(routeValues, createFloor);
         }
 
         // PUT api/<FloorController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] FloorRegisterDto floor)
         {
+            var updatedFloor = await _floorSvc.Update(id, floor);
+            return Ok(updatedFloor);
         }
 
         // DELETE api/<FloorController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            bool deletedFloor = await _floorSvc.Delete(id);
+
+            if (deletedFloor)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
