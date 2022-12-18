@@ -8,6 +8,10 @@ namespace Services.Interfaces
 {
     public interface IGenericCRUDService<T> where T : class
     {
-        List<Task<T>> Get();
+        Task<IEnumerable<T>> GetAll();
+        Task<T> Create(T model);
+        Task<T> GetById(int id);
+        Task<T> Update(int id, T model);
+        Task<bool> Delete(int id);
     }
 }

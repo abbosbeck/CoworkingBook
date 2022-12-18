@@ -7,6 +7,10 @@
         public int FloorId { get; set; }
         public decimal Summasi { get; set; }
 
+        public virtual BranchModel Branch { get; set; }
+        public virtual FloorModel Floor { get; set;}
+        public ICollection<BookedTableModel> BookedTables { get; set; }
+
 
     }
 }
