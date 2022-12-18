@@ -7,16 +7,16 @@ namespace Application.Services
 {
     public class BookedTableCRUDService : IGenericCRUDService<BookedTableResponseDto, BookedTableRegisterDto>
     {
-        private readonly IGenericRepository<BookedTableModel> _genericCRUDRepository;
+        private readonly IGenericRepository<BookedTable> _genericCRUDRepository;
 
-        public BookedTableCRUDService(IGenericRepository<BookedTableModel> genericCRUD)
+        public BookedTableCRUDService(IGenericRepository<BookedTable> genericCRUD)
         {
             _genericCRUDRepository = genericCRUD;
         }
 
         public async Task<BookedTableResponseDto> Create(BookedTableRegisterDto model)
         {
-            var newTable = new BookedTableModel
+            var newTable = new BookedTable
             {
                 TableId = model.TableId,
                 FromTime = model.FromTime,
@@ -76,7 +76,7 @@ namespace Application.Services
 
         public async Task<BookedTableResponseDto> Update(int id, BookedTableRegisterDto model)
         {
-            var newModel = new BookedTableModel
+            var newModel = new BookedTable
             {
                 Id = id,
                 TableId = model.TableId,

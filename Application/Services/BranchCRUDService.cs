@@ -12,16 +12,16 @@ namespace Application.Services
 {
     public class BranchCRUDService : IGenericCRUDService<BranchResponseDto, BranchRegisterDto>
     {
-        private readonly IGenericRepository<BranchModel> _repository;
+        private readonly IGenericRepository<Branch> _repository;
 
-        public BranchCRUDService(IGenericRepository<BranchModel> repository)
+        public BranchCRUDService(IGenericRepository<Branch> repository)
         {
             _repository = repository;
         }
 
         public async Task<BranchResponseDto> Create(BranchRegisterDto model)
         {
-            var branch = new BranchModel()
+            var branch = new Branch()
             {
                 BranchName = model.BranchName,
                 NumberOfChairs = model.NumberOfChairs,
@@ -80,7 +80,7 @@ namespace Application.Services
 
         public async Task<BranchResponseDto> Update(int id, BranchRegisterDto model)
         {
-            var newBranch = new BranchModel()
+            var newBranch = new Branch()
             {
                 Id = id,
                 BranchName = model.BranchName,

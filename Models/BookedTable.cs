@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class BookedTableModel
+    public class BookedTable
     {
         public int Id { get; set; }
         public int TableId { get; set; }
         public DateTime FromTime { get; set; }
         public int Period { get; set; }
 
-        public virtual TableModel Table { get; set; }
+        public virtual Table Table { get; set; }
 
     }
 }

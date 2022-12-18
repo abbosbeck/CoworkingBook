@@ -5,7 +5,7 @@ using Models;
 
 namespace DataAccess.Repositorys
 {
-    public class BranchesRepository : IGenericRepository<BranchModel>
+    public class BranchesRepository : IGenericRepository<Branch>
     {
         private readonly AppDbContext _dbContext;
         public BranchesRepository(AppDbContext dbContext)
@@ -13,7 +13,7 @@ namespace DataAccess.Repositorys
             _dbContext = dbContext;
         }
 
-        public async Task<BranchModel> Create(BranchModel model)
+        public async Task<Branch> Create(Branch model)
         {
             await _dbContext.Branches.AddAsync(model);
             await _dbContext.SaveChangesAsync();
@@ -32,17 +32,17 @@ namespace DataAccess.Repositorys
             return false;
         }
 
-        public async Task<IEnumerable<BranchModel>> GetAll()
+        public async Task<IEnumerable<Branch>> GetAll()
         {
             return await _dbContext.Branches.ToListAsync();
         }
 
-        public async Task<BranchModel> GetById(int id)
+        public async Task<Branch> GetById(int id)
         {
             return await _dbContext.Branches.FindAsync(id);
         }
 
-        public async Task<BranchModel> Update(int id, BranchModel model)
+        public async Task<Branch> Update(int id, Branch model)
         {
             var updateBranch = _dbContext.Branches.Attach(model);
             updateBranch.State = EntityState.Modified;

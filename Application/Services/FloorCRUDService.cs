@@ -12,16 +12,16 @@ namespace Application.Services
 {
     public class FloorCRUDService : IGenericCRUDService<FloorResponseDto, FloorRegisterDto>
     {
-        private readonly IGenericRepository<FloorModel> _repository;
+        private readonly IGenericRepository<Floor> _repository;
 
-        public FloorCRUDService(IGenericRepository<FloorModel> repository)
+        public FloorCRUDService(IGenericRepository<Floor> repository)
         {
             _repository = repository;
         }
 
         public async Task<FloorResponseDto> Create(FloorRegisterDto model)
         {
-            var result = new FloorModel()
+            var result = new Floor()
             {
                 NumbersOfChair = model.NumbersOfChair,
                 BranchId = model.BranchId,
@@ -80,7 +80,7 @@ namespace Application.Services
 
         public async Task<FloorResponseDto> Update(int id, FloorRegisterDto model)
         {
-            var newFloor = new FloorModel()
+            var newFloor = new Floor()
             {
                 Id = id,
                 NumbersOfChair = model.NumbersOfChair,
