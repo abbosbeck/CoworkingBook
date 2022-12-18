@@ -53,7 +53,12 @@ builder.Services.AddTransient<IGenericRepository<BookedTableModel>, BookedesRepo
 builder.Services.AddTransient<IGenericCRUDService<BranchResponseDto, BranchRegisterDto>, BranchCRUDService>();
 builder.Services.AddTransient<IGenericRepository<BranchModel>, BranchesRepository>();
 
+builder.Services.AddTransient<IGenericCRUDService<FloorResponseDto, FloorRegisterDto>, FloorCRUDService>();
+builder.Services.AddTransient<IGenericRepository<FloorModel>, FloorsRepository>();
 
+
+builder.Services.AddTransient<IGenericCRUDService<TableResponseDto, TableRegisterDto>, TableCRUDService>();
+builder.Services.AddTransient<IGenericRepository<TableModel>, TablesRepository>();
 
 var app = builder.Build();
 
