@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services.Interfaces;
@@ -33,6 +34,7 @@ namespace CoworkingBook.Api.Controllers
 
         // POST api/<BranchController>
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Post([FromBody] BranchRegisterDto value)
         {
             var createBranch = await _branchSvc.Create(value);
@@ -42,6 +44,7 @@ namespace CoworkingBook.Api.Controllers
 
         // PUT api/<BranchController>/5
         [HttpPut("{id}")]
+        [Authorize (Roles = "Admin")]
         public async Task<IActionResult> Put(int id, [FromBody] BranchRegisterDto branch)
         {
             var updatedBranch = await _branchSvc.Update(id, branch);
@@ -50,6 +53,7 @@ namespace CoworkingBook.Api.Controllers
 
         // DELETE api/<BranchController>/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             bool deletedBranch = await _branchSvc.Delete(id);

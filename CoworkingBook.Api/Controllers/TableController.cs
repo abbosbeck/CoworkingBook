@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
 
@@ -30,6 +31,7 @@ namespace CoworkingBook.Api.Controllers
 
         // POST api/<TableController>
         [HttpPost]
+        [Authorize (Roles = "Admin")]
         public async Task<IActionResult> Post([FromBody] TableRegisterDto value)
         {
             var createTable = await _genericService.Create(value);
@@ -39,6 +41,7 @@ namespace CoworkingBook.Api.Controllers
 
         // PUT api/<TableController>/5
         [HttpPut("{id}")]
+        [Authorize (Roles = "Admin")]
         public async Task<IActionResult> Put(int id, [FromBody] TableRegisterDto branch)
         {
             var updatedTable = await _genericService.Update(id, branch);
@@ -47,6 +50,7 @@ namespace CoworkingBook.Api.Controllers
 
         // DELETE api/<TableController>/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             bool deletedTable = await _genericService.Delete(id);
