@@ -1,6 +1,6 @@
-namespace Service.Dto;
+namespace Application.Dto;
 
-class FloorDto
+public class FloorDto
 {
     public int NumbersOfChair { get; set; }
     public int BranchId { get; set; }

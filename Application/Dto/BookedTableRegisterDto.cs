@@ -1,8 +1,7 @@
-namespace Service.Dto;
+namespace Application.Dto;
 
-class BookedTableDto
+public class BookedTableRegisterDto
 {
-    public int TableId { get; set; }
     public DateTime FromTime { get; set; }
     public int Period { get; set; }
 }

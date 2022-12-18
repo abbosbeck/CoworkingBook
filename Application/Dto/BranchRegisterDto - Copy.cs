@@ -1,6 +1,6 @@
-namespace Service.Dto;
+namespace Application.Dto;
 
-class BranchDto
+public class BranchRegisterDto
 {
     public string BranchName { get; set; }
     public int NumberOfChairs { get; set; }
