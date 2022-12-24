@@ -33,8 +33,8 @@ namespace CoworkingBook.Api.Controllers
         }
 
         // POST api/<BranchContr oller>
-        [Authorize(Roles = "Admin")]
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Post([FromBody] BranchRegisterDto value)
         {
             var createBranch = await _branchSvc.Create(value);
@@ -44,7 +44,7 @@ namespace CoworkingBook.Api.Controllers
 
         // PUT api/<BranchController>/5
         [HttpPut("{id}")]
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Put(int id, [FromBody] BranchRegisterDto branch)
         {
             var updatedBranch = await _branchSvc.Update(id, branch);

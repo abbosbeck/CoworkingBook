@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DataAccess.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221218042911_addedIdentityDbTables")]
-    partial class addedIdentityDbTables
+    [Migration("20221224183640_addedRole")]
+    partial class addedRole
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,24 @@ namespace DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5a579185-bc7f-4e40-af11-aa5a77cdfff3",
+                            Email = "admin@site.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@SITE.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHveX8LLLQExzoASF6aViUAMt3xnPA3kRS59dMKssh57lWatuuuu6PNOxR/u9jGb5g==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6513e2ab-0fe1-4ea9-b2d9-a363d03f0127",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -115,6 +133,15 @@ namespace DataAccess.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "dde1e9a6-a04c-4a92-887b-073bac17f667",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -202,6 +229,13 @@ namespace DataAccess.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -223,7 +257,7 @@ namespace DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Models.BookedTableModel", b =>
+            modelBuilder.Entity("Models.BookedTable", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -247,7 +281,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Bookeds");
                 });
 
-            modelBuilder.Entity("Models.BranchModel", b =>
+            modelBuilder.Entity("Models.Branch", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -266,7 +300,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Branches");
                 });
 
-            modelBuilder.Entity("Models.FloorModel", b =>
+            modelBuilder.Entity("Models.Floor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -287,7 +321,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Floors");
                 });
 
-            modelBuilder.Entity("Models.TableModel", b =>
+            modelBuilder.Entity("Models.Table", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -364,9 +398,9 @@ namespace DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Models.BookedTableModel", b =>
+            modelBuilder.Entity("Models.BookedTable", b =>
                 {
-                    b.HasOne("Models.TableModel", "Table")
+                    b.HasOne("Models.Table", "Table")
                         .WithMany("BookedTables")
                         .HasForeignKey("TableId")
                         .IsRequired();
@@ -374,9 +408,9 @@ namespace DataAccess.Migrations
                     b.Navigation("Table");
                 });
 
-            modelBuilder.Entity("Models.FloorModel", b =>
+            modelBuilder.Entity("Models.Floor", b =>
                 {
-                    b.HasOne("Models.BranchModel", "Branch")
+                    b.HasOne("Models.Branch", "Branch")
                         .WithMany("Floors")
                         .HasForeignKey("BranchId")
                         .IsRequired();
@@ -384,14 +418,14 @@ namespace DataAccess.Migrations
                     b.Navigation("Branch");
                 });
 
-            modelBuilder.Entity("Models.TableModel", b =>
+            modelBuilder.Entity("Models.Table", b =>
                 {
-                    b.HasOne("Models.BranchModel", "Branch")
+                    b.HasOne("Models.Branch", "Branch")
                         .WithMany("Tables")
                         .HasForeignKey("BranchId")
                         .IsRequired();
 
-                    b.HasOne("Models.FloorModel", "Floor")
+                    b.HasOne("Models.Floor", "Floor")
                         .WithMany("Tables")
                         .HasForeignKey("FloorId")
                         .IsRequired();
@@ -401,19 +435,19 @@ namespace DataAccess.Migrations
                     b.Navigation("Floor");
                 });
 
-            modelBuilder.Entity("Models.BranchModel", b =>
+            modelBuilder.Entity("Models.Branch", b =>
                 {
                     b.Navigation("Floors");
 
                     b.Navigation("Tables");
                 });
 
-            modelBuilder.Entity("Models.FloorModel", b =>
+            modelBuilder.Entity("Models.Floor", b =>
                 {
                     b.Navigation("Tables");
                 });
 
-            modelBuilder.Entity("Models.TableModel", b =>
+            modelBuilder.Entity("Models.Table", b =>
                 {
                     b.Navigation("BookedTables");
                 });

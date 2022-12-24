@@ -1,6 +1,4 @@
 ﻿
-
-using Infrastructure.Conficurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -47,7 +45,23 @@ namespace DataAccess
                 .HasForeignKey(p => p.BranchId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+            #region Role
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "1",
+                Name = "Admin",
+                NormalizedName = "ADMIN"
 
+            });
+            #endregion
+
+            #region UserRole
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "1",
+                UserId = "1"
+            });
+            #endregion
             #region Seed
 
             modelBuilder.Entity<AppUser>()
@@ -67,7 +81,8 @@ namespace DataAccess
                     LockoutEnabled = true,
                     AccessFailedCount = 0
                 });
-
+            
+            
             #endregion
 
             //modelBuilder.ApplyConfiguration(new AppUserConfiguration());
